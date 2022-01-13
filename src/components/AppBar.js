@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Liked', /* 'Search', */ 'Github'];
+const pages = ['Liked', 'Github'];
 
 const ResponsiveAppBar = (props) => {
   const { setLikedPage } = props
@@ -20,6 +20,7 @@ const ResponsiveAppBar = (props) => {
     setAnchorElNav(event.currentTarget);
   };
 
+  // Nav Bar buttons handler
   const handleCloseNavMenu = (page) => {
     if (page === "Liked") setLikedPage(true)
     if (page === "Github") window.open('https://github.com/avianleung/Spacestagram', '_blank');

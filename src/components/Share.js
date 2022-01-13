@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Fragment, useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import ShareIcon from '@mui/icons-material/Share';
 import IconButton from '@mui/material/IconButton';
@@ -7,13 +7,15 @@ import CloseIcon from '@mui/icons-material/Close';
 export default function SimpleSnackbar(props) {
   const { url } = props
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
+  // copies url of img to clipboard
   const handleClick = () => {
     navigator.clipboard.writeText(url)
     setOpen(true);
   };
 
+  // triggered when copy notif should be closed
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -23,7 +25,7 @@ export default function SimpleSnackbar(props) {
   };
 
   const action = (
-    <React.Fragment>
+    <Fragment>
       <IconButton
         size="small"
         aria-label="close"
@@ -32,7 +34,7 @@ export default function SimpleSnackbar(props) {
       >
         <CloseIcon fontSize="small" />
       </IconButton>
-    </React.Fragment>
+    </Fragment>
   );
 
   return (
@@ -41,7 +43,7 @@ export default function SimpleSnackbar(props) {
         aria-label="share" 
         onClick={handleClick}
       >
-          <ShareIcon />
+        <ShareIcon />
       </IconButton>
       <Snackbar
         open={open}

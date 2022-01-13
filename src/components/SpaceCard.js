@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -32,10 +31,12 @@ export default function SpaceCard(props) {
   const [liked, setLiked] = useState(false)
   const [expanded, setExpanded] = useState(false);
 
+  // explanation expand handler
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  // handler that triggers when like button clicked
   function handleLike() {
     const spaceItem = {
       date,
@@ -49,6 +50,7 @@ export default function SpaceCard(props) {
     setLiked(!liked)
   }
 
+  // set liked value to true on mount if in localStorage
   useEffect(() => {
     if (store.get(`${date}`)) {
       setLiked(true);
@@ -96,13 +98,11 @@ export default function SpaceCard(props) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      {/* <CardContent style={{ paddingTop: "6px" }}> */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Typography variant="body2" color="text.secondary" style={{ padding: "0 15px 15px 15px" }}>
           {explanation}
         </Typography>
         </Collapse>
-      {/* </CardContent> */}
     </Card>
   );
 }

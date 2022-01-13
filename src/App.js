@@ -2,14 +2,19 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import store from "store2";
+
+// MUI imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
+// Components
 import AppBar from "./components/AppBar"
 import DatePicker from "./components/DatePicker"
 import SpaceCard from "./components/SpaceCard";
 
+// MUI dark theme
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -24,28 +29,7 @@ function App() {
   const [startDate, setStartDate] = useState(getDate(9))
   const [endDate, setEndDate] = useState(getDate(0))
 
-
-  // calls fetchStudentData() on mount
-  useEffect(() => {
-    fetchSpaceData();
-  }, []);
-
-  // GET Request to store response data in studentData state
-  function fetchSpaceData() {
-    setSpaceData(null)
-    const baseURL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}`;
-    axios
-      .get(baseURL)
-      .then((response) => {
-        //setSpaceData([response.data])
-        setSpaceData(response.data.reverse())
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+  // Function to set default days
   function getDate(previousDays) {
     let millisecondDayOffset = previousDays * 86400000
     let today = new Date()
@@ -53,6 +37,30 @@ function App() {
     today = new Date(today.getTime() - (offset*60*1000) - millisecondDayOffset)
 
     return today.toISOString().split('T')[0]
+  }
+
+  // calls fetchSpaceData() on mount
+  useEffect(() => {
+    fetchSpaceData();
+  }, []);
+
+  // GET Request to store response data in studentData state
+  function fetchSpaceData() {
+    setSpaceData(null)
+
+    // start and end date logic handling (return array reversed if start > end)
+    const startDateLogic = startDate < endDate ? startDate : endDate
+    const endDateLogic  = startDate < endDate ? endDate : startDate
+
+    const baseURL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${startDateLogic}&end_date=${endDateLogic}`;
+    axios
+      .get(baseURL)
+      .then((response) => {
+        setSpaceData(startDate < endDate ? response.data.reverse() : response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -63,19 +71,34 @@ function App() {
             <CircularProgress />
           </Box>
         )}
-        {likedPage && Object.values(store()).map((obj, index) => (
-          <div className="center-cards">
-            <SpaceCard
-              key={obj.date}
-              date={obj.date}
-              title={obj.title}
-              explanation={obj.explanation}
-              url={obj.url}
-              hdurl={obj.hdurl}
-              mediaType={obj.mediaType}
-            />
-          </div>
-        ))}
+        {spaceData && likedPage && (
+          <>
+            {Object.keys(store()).length === 0 && (
+              <Typography
+                sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, color: "white" }}
+                className="none-liked"
+                style={{ cursor: "pointer" }}
+                variant="body"
+                component="div"
+              >
+                0 liked images.
+              </Typography>
+            )}
+            {Object.values(store())?.map((obj, index) => (
+              <div className="center-cards">
+                <SpaceCard
+                  key={obj.date}
+                  date={obj.date}
+                  title={obj.title}
+                  explanation={obj.explanation}
+                  url={obj.url}
+                  hdurl={obj.hdurl}
+                  mediaType={obj.mediaType}
+                />
+              </div>
+            ))}
+          </>
+        )}
         {!likedPage && (
           <>
             <div className="center">
@@ -102,7 +125,6 @@ function App() {
             ))}
           </>
         )}
-        
     </ThemeProvider>
   );
 }

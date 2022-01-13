@@ -8,12 +8,12 @@ import { TextField } from "@mui/material";
 import AdapterDayJs from '@mui/lab/AdapterDayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
-import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function SpaceCard(props) {
   const { startDate, endDate, setStartDate, setEndDate, fetchSpaceData } = props
 
+  // formats date to yyyy-mm-dd
   function formatDate(dateToFormat) {
     const offset = dateToFormat.getTimezoneOffset()
     dateToFormat = new Date(dateToFormat.getTime() - (offset*60*1000))
