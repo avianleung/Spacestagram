@@ -24,6 +24,7 @@ function App() {
   const [startDate, setStartDate] = useState(getDate(9))
   const [endDate, setEndDate] = useState(getDate(0))
 
+
   // calls fetchStudentData() on mount
   useEffect(() => {
     fetchSpaceData();
@@ -37,7 +38,7 @@ function App() {
       .get(baseURL)
       .then((response) => {
         //setSpaceData([response.data])
-        setSpaceData(response.data)
+        setSpaceData(response.data.reverse())
 
       })
       .catch((error) => {
@@ -77,7 +78,7 @@ function App() {
         ))}
         {!likedPage && (
           <>
-            <div className="center-cards">
+            <div className="center">
               <DatePicker
                 startDate={startDate}
                 endDate={endDate}

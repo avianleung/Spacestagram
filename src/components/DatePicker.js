@@ -9,6 +9,7 @@ import AdapterDayJs from '@mui/lab/AdapterDayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function SpaceCard(props) {
   const { startDate, endDate, setStartDate, setEndDate, fetchSpaceData } = props
@@ -20,9 +21,10 @@ export default function SpaceCard(props) {
   } 
 
   return (
-    <Card sx={{ width: 550 }}>
+    <Card sx={{ width: 560, opacity: 0.75  }}>
       <CardHeader
-        subheader="Currently Viewing Nasa's Atronomy Picures of The Day"
+        titleTypographyProps={{variant:'h7' }}
+        title="Currently Viewing Nasa's Atronomy Picures of The Day"
         style={{ textAlign: "center" }}
       />
           <CardContent>
@@ -37,15 +39,15 @@ export default function SpaceCard(props) {
                 <DatePicker
                   label="FROM"
                   inputFormat="YYYY-MM-DD"
-                  value={startDate}
-                  onChange={(value) => setStartDate(formatDate(value.$d))}
+                  value={endDate}
+                  onChange={(value) => setEndDate(formatDate(value.$d))}
                   renderInput={(params) => <TextField {...params} />}
                 />
                 <DatePicker
                   label="TO"
                   inputFormat="YYYY-MM-DD"
-                  value={endDate}
-                  onChange={(value) => setEndDate(formatDate(value.$d))}
+                  value={startDate}
+                  onChange={(value) => setStartDate(formatDate(value.$d))}
                   renderInput={(params) => <TextField {...params} />
                   }
                 />
@@ -54,7 +56,7 @@ export default function SpaceCard(props) {
                 style={{ padding: 0 }}
                 onClick={() => fetchSpaceData()}
               >
-                <CheckCircleOutlineOutlinedIcon/>
+                <ArrowForwardIcon />
               </IconButton>
             </div>
           </CardContent>

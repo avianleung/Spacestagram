@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Liked', 'Github'];
+const pages = ['Liked', /* 'Search', */ 'Github'];
 
 const ResponsiveAppBar = (props) => {
   const { setLikedPage } = props
@@ -27,7 +27,7 @@ const ResponsiveAppBar = (props) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky" sx={{ bgcolor: "#000000" }}>
       <Container maxWidth="sm">
         <Toolbar disableGutters>
           <Typography

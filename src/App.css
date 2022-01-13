@@ -1,12 +1,24 @@
 body {
-  background-color: #060d14;
+  background-color: #000000;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
 }
 
 .center-cards {
   display: flex;
   justify-content: center;
-  margin-top: 2vw;
-  margin-bottom: 2vw;
+  margin-top: 3vw;
+  margin-bottom: 5vw;
+}
+
+.right-cards {
+  display: flex;
+  justify-content: right;
 }
 
 .loading {
