@@ -22,7 +22,7 @@ const ResponsiveAppBar = (props) => {
 
   const handleCloseNavMenu = (page) => {
     if (page === "Liked") setLikedPage(true)
-    if (page === "Github") window.open('https://www.github.com', '_blank');
+    if (page === "Github") window.open('https://github.com/avianleung/Spacestagram', '_blank');
     setAnchorElNav(null);
   };
 
