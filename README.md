@@ -8,7 +8,7 @@ An app that displays Nasa's Astronomy Picture of The Day in a social media style
 
 ### Features
 1. Like and unlike images
-2. Stored likes in localStorage
+2. Store likes in localStorage
 3. View liked posts
 4. Search for a date range of images
-5. Share photos via copied link
+5. Share images via copied link
