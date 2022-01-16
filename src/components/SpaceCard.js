@@ -99,7 +99,7 @@ export default function SpaceCard(props) {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Typography variant="body2" color="text.secondary" style={{ padding: "0 15px 15px 15px" }}>
+        <Typography variant="body2" color="text.secondary" style={{ padding: "0 20px 20px 20px" }}>
           {explanation}
         </Typography>
         </Collapse>
