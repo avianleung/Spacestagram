@@ -9,6 +9,7 @@ import AdapterDayJs from '@mui/lab/AdapterDayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import dayjs from 'dayjs'
 
 export default function SpaceCard(props) {
   const { startDate, endDate, setStartDate, setEndDate, fetchSpaceData } = props
@@ -18,7 +19,7 @@ export default function SpaceCard(props) {
     const offset = dateToFormat.getTimezoneOffset()
     dateToFormat = new Date(dateToFormat.getTime() - (offset*60*1000))
     return dateToFormat.toISOString().split('T')[0]
-  } 
+  }
 
   return (
     <Card sx={{ width: 560, opacity: 0.75  }}>
@@ -39,6 +40,7 @@ export default function SpaceCard(props) {
                 <DatePicker
                   label="FROM"
                   inputFormat="YYYY-MM-DD"
+                  maxDate={dayjs(new Date())}
                   value={endDate}
                   onChange={(value) => setEndDate(formatDate(value.$d))}
                   renderInput={(params) => <TextField {...params} />}
@@ -47,6 +49,7 @@ export default function SpaceCard(props) {
                   label="TO"
                   inputFormat="YYYY-MM-DD"
                   value={startDate}
+                  maxDate={dayjs(new Date())}
                   onChange={(value) => setStartDate(formatDate(value.$d))}
                   renderInput={(params) => <TextField {...params} />
                   }
