@@ -1,6 +1,6 @@
 # Spacestagram
 
-This project is available at (https://ecstatic-varahamihira-4f195e.netlify.app/).
+This project is available at (https://spacestagram-avian.netlify.app/).
 
 ## Description
 
